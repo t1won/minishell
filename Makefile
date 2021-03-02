@@ -16,23 +16,23 @@ RM = rm -rf
 
 DEBUG = -g -fsanitize=address
 
-all		: $(NAME)
+all : $(NAME)
 
-$(LIBFT):
+$(LIBFT) :
 	$(MAKE) -C ./libft
 
-$(NAME)	: $(LIBFT)
+$(NAME) : $(LIBFT)
 	$(CC) $(SRCS) $(LIBS) $(HEADER) $(CFLAG) $(DEBUG) -o $(NAME)
 
-clean	:
+clean :
 	$(MAKE) -C ./libft clean
 	$(RM) $(OBJS)
 
-flean	:
+fclean :
 	$(MAKE) -C ./libft fclean
 	$(RM) $(NAME)
 
-re		:
+re :
 	fclean all
 
 
