@@ -1,6 +1,7 @@
 NAME = minishell
 
-SRCS = srcs/main.c
+SRCS = srcs/main.c \
+		srcs/utils/gnl.c
 
 LIBFT = libft.a
 
