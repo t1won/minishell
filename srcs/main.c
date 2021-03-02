@@ -6,15 +6,14 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:42 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/02 10:28:14 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/02 11:35:37 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int main(void)
+int		main(int argc, char **argv, char **envp)
 {
-	printf("%zu\n", ft_strlen("Hello, world"));
 
 	return 0;
 }
