@@ -1,7 +1,9 @@
 NAME = minishell
 
 SRCS = srcs/main.c \
-		srcs/utils/gnl.c
+		srcs/utils/gnl.c \
+		srcs/utils/main_utils.c \
+		srcs/utils/handling_signals.c
 
 LIBFT = libft.a
 

@@ -6,77 +6,65 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:42 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/02 16:16:52 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/03 19:45:54 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-void	print_prompt(void)
+char	**g_envp;
+
+// gnl
+// 1 : if can be read line
+// 0 : if reached EOF
+// -1 : if occured an error
+int		get_input_line(char **line)
 {
-	// static char	*curpath;
+	int		ret;
+	char	*input;
+	// char	*tmp;
 
-	ft_putstr_fd(COLOR_BR_BLUE, STDOUT);
-	write(STDOUT_FILENO, "minishell", 10);
-	// ft_putstr_fd(getcwd(curpath, MAXSIZE), STDIN);
-	ft_putstr_fd(COLOR_WHITE, STDOUT);
-	ft_putstr_fd("$ ", STDOUT);
-}
-
-void	main_signal_handler(int signo)
-{
-	pid_t	pid;
-	int		status;
-
-	pid = waitpid(-1, &status, WNOHANG);
-	if (signo == SIGINT)
+	*line = ft_strdup("");
+	while (1)
 	{
-		if (pid == -1)
-		{
-			ft_putstr_fd("\b\b  \b\b\n", STDOUT);
-			print_prompt();
-			// g_exit_status = 1;
-		}
-		else
-			ft_putchar_fd('\n', STDOUT);
+		ret = get_next_line(STDIN, &input);
+		*line = ft_strappend(*line, input);
 	}
-	else if (signo == SIGQUIT)
-	{
-		if (pid == -1)
-			ft_putstr_fd("\b\b  \b\b", STDOUT);
-		else
-			ft_putstr_fd("Quit: 3\n", STDOUT);
-	}
-}
-
-// TEMPTEMP
-void	handle_signal(void)
-{
-	signal(SIGINT, main_signal_handler);
-	signal(SIGQUIT, main_signal_handler);
 }
 
 void	run_minishell()
 {
-	handle_signal();
-	while (1)
-	{
-		print_prompt();
-	}
+	char	*line;
+	// char	**args;
+	int		status;
 
+	// TODO: handle_signal();
+
+	status = 1;
+	while (status != 0)
+	{
+		handle_main_signals();
+		print_prompt();
+		status = get_input_line(&line); // read a command line
+		// args = split_line(line); // tokenize
+		// status = execute_command(args); // using status determine when to exit
+
+		// free(line);
+		// free(args);
+		break ;
+	}
 }
 
 int		main(int argc, char **argv, char **envp)
 {
 	// TODO : initialize variables
-	// TODO : set sigals
 	// TODO : show ascii art
 
-	// TEMP
 	(void)argc;
 	(void)argv;
-	(void)envp;
 
-	run_minishell();
-	return 0;
+	copy_environment_variables(envp);
+	// run_minishell();
+
+	return EXIT_SUCCESS;
 }
