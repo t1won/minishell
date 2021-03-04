@@ -6,7 +6,7 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:41:00 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/03 22:51:05 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:56:52 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ static int	ft_echo_env(char *obj, char **envs)
 	int	cnt;
 	int	i;
 
-	obj++;
 	if (obj[0] == '?')
 		print_exit_status();
-	cnt = 1;
+	cnt = 0;
 	while (obj[cnt] && (ft_isalnum(obj[cnt]) || obj[cnt] == '_'))
 		cnt++;
+	i = 0;
 	while (envs[i])
 	{
 		if (ft_strncmp(obj, envs[i], cnt - 1) == 0 && envs[i][cnt] == '=')
 			printf("%s", &envs[i][cnt + 1]);
 		i++;
 	}
+	if (cnt == 0)
+		printf("$");
 	return (cnt);
 }
 
@@ -54,7 +56,7 @@ static void	print_obj(char *obj, char **envs)
 		{
 			*temp = '\0';
 			printf("%s", obj);
-			temp += ft_echo_env(temp, envs);
+			temp += ft_echo_env(temp + 1, envs);
 			obj = temp + 1;
 		}
 		temp++;
@@ -103,7 +105,10 @@ void	ft_echo(char **objs, char **envs)
 //test main
 int	main(int argc, char **argv, char **envp)
 {
+	int i = 0;
 	argv++;
-	//printf("%s", envp[0]);
+	while(argv[i])
+		printf("%s ", argv[i++]);
+	printf("\n");
 	ft_echo(argv, envp);
 }
