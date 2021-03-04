@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:56:18 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/03 17:54:06 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/04 10:11:24 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	show_ascii_args(void)
 void	copy_environment_variables(char **envs)
 {
 	int size;
-	int i;
 
 	size = 0;
 	while (envs[++size])

@@ -6,14 +6,16 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:31:15 by tseo              #+#    #+#             */
-/*   Updated: 2020/10/07 10:35:38 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/04 10:55:58 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (0);
 	while (*s != (unsigned char)c)
 	{
 		if (*s == 0)
