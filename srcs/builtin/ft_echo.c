@@ -6,7 +6,7 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:41:00 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/04 15:56:52 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/07 16:50:09 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../incs/minishell.h"
 
 int	g_exit_status = 0; // test
-
+/*
 static void	print_exit_status()
 {
 	printf("%d", g_exit_status);
@@ -100,8 +100,42 @@ void	ft_echo(char **objs, char **envs)
 	if (opt_n == 0)
 		printf("\n");
 }
+*/
 
+static int	check_opt(char *opt)
+{
+	int	i;
+	
+	if (opt[0] != '-')
+		return (0);
+	i = 1;
+	while (opt[i])
+	{
+		if (opt[i++] != 'n')
+			return (0);
+	}
+	return (1);
+}
 
+void		ft_echo(char **objs)
+{
+	int	opt_n;
+	int	i;
+
+	opt_n = 0;
+	if (objs[0] != NULL)
+		opt_n = check_opt(objs[0]);
+	i = opt_n;
+	while (objs[i])
+	{
+		if (i > opt_n)
+			printf(" ");
+		printf("%s", objs[i++]);
+	}
+	if (opt_n == 0)
+		printf("\n");
+}
+/*
 //test main
 int	main(int argc, char **argv, char **envp)
 {
@@ -112,3 +146,4 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n");
 	ft_echo(argv, envp);
 }
+*/

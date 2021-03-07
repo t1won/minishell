@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/04 20:46:36 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/07 17:12:12 by jaeelee          ###   ########.fr       */
+/*   Created: 2021/03/07 17:27:39 by jaeelee           #+#    #+#             */
+/*   Updated: 2021/03/07 18:15:08 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-#define PATH_MAX 1024
-
-int	ft_pwd()
+extern char **g_envs;
+void	ft_env()
 {
-	char buf[PATH_MAX];
-
-	if(getcwd(buf,PATH_MAX) == NULL)
-	{
-		printf("current working directory get error: %s\n", strerror(errno));
-		return (-1);
-	}
-	printf("%s\n", buf);
-	return (0);
+	int	i;
+	
+	i = 0;
+	while (g_envs[i])
+		printf("%s\n", g_envs[i++]);
 }
