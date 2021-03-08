@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:42 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 11:39:52 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 18:33:00 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	run_minishell()
 	{
 		handle_main_signals();
 		print_prompt();
-		get_input_line(&line);
+		get_input_line(&line); // TODO : EOF
 		input_lines = ft_split(line, ';');
 		// parse_input(line, input_lines);
-		for (int i = 0; input_lines[i]; i++)
-			printf("[%d] : %s\n", i, input_lines[i]);
-
+		// for (int i = 0; input_lines[i]; i++)
+		// 	printf("[%d] : %s\n", i, input_lines[i]);
+		parse_input(input_lines[0]);
 		int i = 0;
 		while (input_lines[i])
 		{

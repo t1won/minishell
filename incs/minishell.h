@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 11:08:05 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 18:34:45 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void	child_signal_hanlder(int signo);
 /*
 ** parser
 */
-char	**ft_charset_split(char *str, char *charset);
-void	parse_input(char *line, char **input_lines);
+void	parse_input(char *cmd_line);
 
 /*
 ** error

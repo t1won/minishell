@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 08:49:43 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/07 08:50:41 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 18:30:59 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 
 # define STDIN 0
 # define STDOUT 1
+# define STDERR 2
 # define MAXSIZE 1024
+
+# define TYPE_END 0
+# define TYPE_PIPE 1
+# define TYPE_REDIR 2
 
 # define COLOR_BR_BLUE "\033[34;1m"
 # define COLOR_WHITE "\033[37m"
@@ -24,5 +29,7 @@
 
 # define MAX_FD 1024
 # define GNL_BUFFER_SIZE 25
+
+
 
 #endif

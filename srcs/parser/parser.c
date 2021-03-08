@@ -6,12 +6,17 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 12:45:24 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 11:10:10 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 19:11:04 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/minishell.h"
+/*
+**  1. 토큰화
+**	2. 토큰 별로 처리
+**	3. 구조체에 저장 후 링크드 리스트에 저장
+*/
 
+#include "../incs/minishell.h"
 
 int		get_seperator_num(char *line)
 {
@@ -36,24 +41,39 @@ int		get_seperator_num(char *line)
 	return (count);
 }
 
-// void	split_line_with_separator(char *line, char **input_lines, int s_num)
-// {
-// 	int i = 0;
-// 	while ()
-// }
-
-void	parse_input(char *line, char **input_lines)
+int		get_token_num(char *line)
 {
-	int seperator_num;
-	// int i = 0;
-	(void)input_lines;
-	seperator_num = get_seperator_num(line);
-	// if (!(input_lines = malloc(sizeof(char **) * (seperator_num + 2))))
-		// memory_alloc_error();
-	// input_lines[seperator_num + 1] = NULL;
-	printf("separtor num: %d\n", seperator_num);
-	// while (i < seperator_num + 1)
-	// {
-	// 	split_line_with_separator()
-	// }
+	int count;
+	int i;
+	int sq_flag;
+	int dq_flag;
+
+	sq_flag = 1; // 1이면 single quotes는 닫혀있는 상태
+	dq_flag = 1; // 1이면 double quotes는 닫혀있는 상태
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (sq_flag == 1 && dq_flag == 1 && line[i] == ' ')
+			count++;
+		if (dq_flag == 1 && line[i] == '\'')
+			sq_flag *= -1;
+		if (sq_flag == 1 && i > 1 && line[i - 1] != '\\' && line[i] == '"')
+			dq_flag *= -1;
+		i++;
+	}
+	return (count);
+}
+
+// 반환을 링크드 리스트의 head 포인터로 변환해야 한다
+void	parse_input(char *cmd_line)
+{
+	// int		token_num;
+	// printf("parse: %s\n", cmd_line);
+	(void)cmd_line;
+
+	// char *test = "a\\b d\"e f\"g h";
+	printf("token num: %d\n", get_token_num(cmd_line));
+
+
 }
