@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/03 19:43:23 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 10:47:00 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,29 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "../libft/libft.h"
-
-#define STDIN 0
-#define STDOUT 1
-#define MAXSIZE 1024
-
-#define COLOR_BR_BLUE "\033[34;1m"
-#define COLOR_WHITE "\033[37m"
-#define COLOR_CYAN "\033[36m"
-#define END_COLOR "\033[0m"
-
-#define MAX_FD 1024
-#define GNL_BUFFER_SIZE 25
-
-typedef struct s_cmd
-{
-	char *cmd;			// command
-	char *opt;			// option
-	char **obj;			// object
-	char **redir;		// redirection
-	char **path;		// path
-	char pipe;			// pipe or redirection
-	int fd_in;			// fd in?
-	struct s_cmd *next; // linked list
-} t_cmd;
-
-typedef struct s_env
-{
-	char *key;
-	char *value;
-} t_env;
+#include "const.h"
+#include "data_types.h"
 
 extern char	**g_envp;
+extern char *builtin_str[];
+extern int (*builtin_func[]) (char **);
+
+
+/*
+** utils/temp => need to be deleted
+*/
+int lsh_cd(char **args);
+int lsh_help(char **args);
+int lsh_exit(char **args);
+int ft_launch(char **args);
+char **ft_split_line(char *line);
+int ft_execute(char **args);
+int lsh_num_builtins();
+
+/*
+** read_input
+*/
+int		get_input_line(char **line);
 
 
 /*
@@ -75,5 +66,15 @@ void	handle_main_signals(void);
 void	main_signal_handler(int signo);
 void	child_signal_hanlder(int signo);
 
+/*
+** parser
+*/
+char	**ft_charset_split(char *str, char *charset);
+void	parse_input(char *line, char **input_lines);
+
+/*
+** error
+*/
+void	memory_alloc_error(void);
 
 #endif

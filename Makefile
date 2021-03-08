@@ -3,7 +3,11 @@ NAME = minishell
 SRCS = srcs/main.c \
 		srcs/utils/gnl.c \
 		srcs/utils/main_utils.c \
-		srcs/utils/handling_signals.c
+		srcs/utils/handling_signals.c \
+		srcs/utils/temp.c \
+		srcs/read_input/read_line.c	\
+		srcs/parser/parser.c \
+		srcs/error/handling_error.c
 
 LIBFT = libft.a
 
