@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 12:45:24 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 10:47:09 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 11:10:10 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	parse_input(char *line, char **input_lines)
 {
 	int seperator_num;
 	// int i = 0;
-
+	(void)input_lines;
 	seperator_num = get_seperator_num(line);
-	if (!(input_lines = malloc(sizeof(char **) * (seperator_num + 2))))
-		memory_alloc_error();
-	input_lines[seperator_num + 1] = NULL;
-
+	// if (!(input_lines = malloc(sizeof(char **) * (seperator_num + 2))))
+		// memory_alloc_error();
+	// input_lines[seperator_num + 1] = NULL;
+	printf("separtor num: %d\n", seperator_num);
 	// while (i < seperator_num + 1)
 	// {
 	// 	split_line_with_separator()

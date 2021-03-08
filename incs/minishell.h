@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 10:47:00 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/08 11:08:05 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int lsh_num_builtins();
 */
 int		get_input_line(char **line);
 
+/*
+** utils/ft_charset_split
+*/
+char	**ft_charset_split(char *str, char *charset);
 
 /*
 ** utils/gnl
