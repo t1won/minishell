@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 08:49:43 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 18:30:59 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/09 14:44:50 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define MAX_FD 1024
 # define GNL_BUFFER_SIZE 25
 
-
+#define SEPARATOR_SPACE " \t<>|;"
+#define SEPARATOR "<>|;"
 
 #endif

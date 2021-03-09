@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:56:18 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/04 13:17:11 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/09 18:34:05 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	print_prompt(void)
 {
-	static char	*curpath;
+	// static char	*curpath;
 
 	ft_putstr_fd(COLOR_BR_BLUE, STDOUT);
 	write(STDOUT_FILENO, "minishell", 10);
-	ft_putstr_fd(getcwd(curpath, MAXSIZE), STDIN);
+	// ft_putstr_fd(getcwd(curpath, MAXSIZE), STDIN);
 	ft_putstr_fd(COLOR_WHITE, STDOUT);
 	ft_putstr_fd("$ ", STDOUT);
 }

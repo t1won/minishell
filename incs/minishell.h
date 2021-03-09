@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/08 18:34:45 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/09 09:36:09 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,17 @@ void	child_signal_hanlder(int signo);
 /*
 ** parser
 */
-void	parse_input(char *cmd_line);
+char	**parse_input_line(char *line);
+
+/*
+** lexer
+*/
+void	lexing(char *cmd_line, char **tokens, int token_num);
+
+/*
+** parse util
+*/
+int		is_separtor(char *sep, char c);
 
 /*
 ** error

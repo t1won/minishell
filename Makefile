@@ -7,6 +7,7 @@ SRCS = srcs/main.c \
 		srcs/utils/temp.c \
 		srcs/read_input/read_line.c	\
 		srcs/parser/parser.c \
+		srcs/parser/parse_util.c \
 		srcs/error/handling_error.c
 
 LIBFT = libft.a
