@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/09 09:36:09 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/10 20:32:42 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include "const.h"
 #include "data_types.h"
 
+extern int	g_exit_status;
 extern char	**g_envp;
 extern char *builtin_str[];
 extern int (*builtin_func[]) (char **);
@@ -78,16 +79,32 @@ char	**parse_input_line(char *line);
 /*
 ** lexer
 */
-void	lexing(char *cmd_line, char **tokens, int token_num);
+char	*get_token(char *line, int token_size);
+int		skip_separator_spaces(char *line, int i);
+int		skip_separator(char *line, int i);
+int		check_backslash(char *line, int *i, char quote);
+int		check_and_jmp_quotes(char *line, int i);
+int		count_tokens(char *line);
+
+/*
+** token checker
+*/
+int		check_tokens(char **tokens);
 
 /*
 ** parse util
 */
 int		is_separtor(char *sep, char c);
+int		is_redirection(char *token);
+int		is_pipe(char *token);
+int		is_semicolon(char *token);
 
 /*
 ** error
 */
 void	memory_alloc_error(void);
+int		syntax_error(char *token);
+int		no_command_error(char *cmd);
+int		too_many_args_error(char *cmd);
 
 #endif

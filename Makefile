@@ -8,7 +8,11 @@ SRCS = srcs/main.c \
 		srcs/read_input/read_line.c	\
 		srcs/parser/parser.c \
 		srcs/parser/parse_util.c \
-		srcs/error/handling_error.c
+		srcs/parser/lexer_1.c \
+		srcs/parser/lexer_2.c \
+		srcs/parser/token_checker.c \
+		srcs/error/memory_error.c \
+		srcs/error/token_error.c
 
 LIBFT = libft.a
 

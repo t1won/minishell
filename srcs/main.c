@@ -6,13 +6,14 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:42 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/09 09:25:17 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/10 16:12:14 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
 char	**g_envp;
+int	g_exit_status;
 
 char *builtin_str[] = {
 	"cd",

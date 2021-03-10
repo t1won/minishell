@@ -1,52 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_util.c                                       :+:      :+:    :+:   */
+/*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 09:34:54 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/10 20:32:19 by tseo             ###   ########.fr       */
+/*   Created: 2021/03/10 10:20:46 by tseo              #+#    #+#             */
+/*   Updated: 2021/03/10 20:15:48 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int		is_separtor(char *sep, char c)
+int		syntax_error(char *token)
 {
-	int	i;
-
-	i = 0;
-	while (sep[i])
-	{
-		if (sep[i] == c)
-			return (1);
-		i++;
-	}
+	printf("minishell: syntax error near unexpected token '%s'\n", token);
+	g_exit_status = 258;
 	return (0);
 }
 
-int		is_redirection(char *token)
+int		no_command_error(char *cmd)
 {
-	if (ft_strncmp(token, "<", 1) == 0)
-		return (1);
-	if (ft_strncmp(token, ">", 1) == 0)
-		return (1);
-	if (ft_strncmp(token, ">>", 1) == 0)
-		return (1);
+	printf("minishell: command not found: %s\n", cmd);
+	g_exit_status = 127;
 	return (0);
 }
 
-int		is_pipe(char *token)
+int		too_many_args_error(char *cmd)
 {
-	if (ft_strncmp(token, "|", 1) == 0)
-		return (1);
-	return (0);
-}
+	printf("minishell: too many arguments: %s\n", cmd);
 
-int		is_semicolon(char *token)
-{
-	if (ft_strncmp(token, ";", 1) == 0)
-		return (1);
 	return (0);
 }
