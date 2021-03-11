@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_coversion_1.c                                :+:      :+:    :+:   */
+/*   token_conversion_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:24:29 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/11 09:56:30 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 11:23:05 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ char	*convert_env_token(char *token)
 {
 	char *converted_token;
 
+	converted_token = NULL;
 	if (ft_strlen(token) == 2 && ft_strncmp(token, "$?", 2) == 0)
 		converted_token = ft_strdup(ft_itoa(g_exit_status));
-	else
+	if (get_envs_value(&token[1]))
 		converted_token = ft_strdup(get_envs_value(&token[1]));
+	else
+		converted_token = ft_strdup(""); // TODO: need to be fixed when tokens are put on the linked list
 	free(token);
 	return (converted_token);
 }

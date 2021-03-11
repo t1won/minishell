@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:42 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/11 10:35:26 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 10:45:51 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	run_minishell()
 		temp_args = parse_input_line(line);
 		int i = 0;
 		status = ft_execute(temp_args);
+
 		for (int i = 0; temp_args[i]; i++)
 			free(temp_args[i]);
 		free(temp_args);
@@ -69,6 +70,8 @@ int		main(int argc, char **argv, char **envp)
 	// free(g_envs);
 	run_minishell();
 
-
+/*
+** EXIT 하면서 memory free?
+*/
 	return EXIT_SUCCESS;
 }
