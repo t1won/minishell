@@ -6,14 +6,13 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:41:00 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/07 16:50:09 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/09 20:27:18 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "minishell.h"
 #include "../../incs/minishell.h"
 
-int	g_exit_status = 0; // test
 /*
 static void	print_exit_status()
 {
