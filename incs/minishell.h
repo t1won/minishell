@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/10 20:32:42 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 10:24:44 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include "data_types.h"
 
 extern int	g_exit_status;
-extern char	**g_envp;
+extern char	**g_envs;
 extern char *builtin_str[];
 extern int (*builtin_func[]) (char **);
 
@@ -38,7 +38,6 @@ int lsh_cd(char **args);
 int lsh_help(char **args);
 int lsh_exit(char **args);
 int ft_launch(char **args);
-char **ft_split_line(char *line);
 int ft_execute(char **args);
 int lsh_num_builtins();
 
@@ -98,6 +97,13 @@ int		is_separtor(char *sep, char c);
 int		is_redirection(char *token);
 int		is_pipe(char *token);
 int		is_semicolon(char *token);
+char	*get_envs_value(char *key);
+
+/*
+** token conversion
+*/
+char *convert_sq_token(char *token);
+char	*convert_env_token(char *token);
 
 /*
 ** error

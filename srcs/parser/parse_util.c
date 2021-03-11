@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:34:54 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/10 20:32:19 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 00:16:44 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,18 @@ int		is_semicolon(char *token)
 	if (ft_strncmp(token, ";", 1) == 0)
 		return (1);
 	return (0);
+}
+
+char	*get_envs_value(char *key)
+{
+	int i;
+
+	i = -1;
+	while (g_envs[++i])
+	{
+		if (ft_strncmp(key, g_envs[i], ft_strlen(key)) == 0 &&
+				g_envs[i][ft_strlen(key)] == '=')
+			return (&g_envs[i][ft_strlen(key) + 1]);
+	}
+	return (NULL);
 }

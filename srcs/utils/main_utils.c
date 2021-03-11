@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:56:18 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/09 18:34:05 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 00:26:37 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	copy_environment_variables(char **envs)
 	size = 0;
 	while (envs[++size])
 		size++;
-	if (!(g_envp = malloc(sizeof(char *) * (size + 1))))
+	if (!(g_envs = malloc(sizeof(char *) * (size + 1))))
 		exit(EXIT_FAILURE); // memory allocation failed
 	size = -1;
 	while (envs[++size])
-		g_envp[size] = ft_strdup(envs[size]);
-	g_envp[size] = NULL;
+		g_envs[size] = ft_strdup(envs[size]);
+	g_envs[size] = NULL;
 }

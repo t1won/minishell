@@ -6,13 +6,13 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:42 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/10 16:12:14 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 10:35:26 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-char	**g_envp;
+char	**g_envs;
 int	g_exit_status;
 
 char *builtin_str[] = {
@@ -36,7 +36,7 @@ int lsh_num_builtins()
 void	run_minishell()
 {
 	char	*line;
-	char	**args;
+	// char	**args;
 	int		status;
 	char	**temp_args;
 
@@ -48,10 +48,12 @@ void	run_minishell()
 		get_input_line(&line); // TODO : EOF
 		temp_args = parse_input_line(line);
 		int i = 0;
-		args = ft_split_line(line);
-		status = ft_execute(args);
+		status = ft_execute(temp_args);
+		for (int i = 0; temp_args[i]; i++)
+			free(temp_args[i]);
+		free(temp_args);
 		free(line);
-			i++;
+		i++;
 	}
 }
 
@@ -64,6 +66,7 @@ int		main(int argc, char **argv, char **envp)
 	(void)argv;
 
 	copy_environment_variables(envp);
+	// free(g_envs);
 	run_minishell();
 
 

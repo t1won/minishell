@@ -6,11 +6,27 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 12:45:24 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/10 21:05:17 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 00:28:34 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
+
+int		convert_tokens(char **tokens)
+{
+	int i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		if (tokens[i][0] == '\'')
+			tokens[i] = convert_sq_token(tokens[i]);
+		if (tokens[i][0] == '$')
+			tokens[i] = convert_env_token(tokens[i]);
+		i++;
+	}
+	return (1);
+}
 
 char	**tokenize_input_line(char *line)
 {
@@ -32,11 +48,12 @@ char	**tokenize_input_line(char *line)
 char	**parse_input_line(char *line)
 {
 	char **tokens= tokenize_input_line(line); // TODO : must be freed
-	for (int i = 0; tokens[i]; i++)
-			printf("[%d]: %s\n", i, tokens[i]);
 
 	if (!check_tokens(tokens))
 		return (0);
+	convert_tokens(tokens);
+	for (int i = 0; tokens[i]; i++)
+			printf("[%d]: %s\n", i, tokens[i]);
 
 	return (tokens);
 }

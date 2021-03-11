@@ -11,6 +11,7 @@ SRCS = srcs/main.c \
 		srcs/parser/lexer_1.c \
 		srcs/parser/lexer_2.c \
 		srcs/parser/token_checker.c \
+		srcs/parser/token_coversion_1.c \
 		srcs/error/memory_error.c \
 		srcs/error/token_error.c
 
