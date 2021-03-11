@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:43:53 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/11 20:27:54 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/11 20:52:19 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,20 @@ char	*handling_backslash(char *token)
 	int j;
 	int size;
 	char *converted_token;
+	int len;
 
 	i = 0;
 	size = 0;
+	len = ft_strlen(token);
 	while (token[i])
 	{
 		if (token[i] == '\\' && token[i + 1] == '\\')
+		{
+			i += 2;
+			size++;
+			continue;
+		}
+		if (i != len - 2 && token[i] == '\\' && token[i + 1] == '\"') // 맨 뒤
 		{
 			i += 2;
 			size++;
@@ -89,13 +97,20 @@ char	*handling_backslash(char *token)
 			j++;
 			continue;
 		}
+		if (i != len - 2 && token[i] == '\\' && token[i + 1] == '\"') // 맨 뒤
+		{
+			converted_token[j] = token[i + 1];
+			i += 2;
+			j++;
+			continue;
+		}
 		converted_token[j] = token[i];
 		j++;
 		i++;
 	}
 	converted_token[size] = 0;
 	// printf("conveted: %s\n", converted_token);
-	// free(token);
+	free(token);
 	// printf("SIZE: %d\n", size);
 	return (converted_token);
 }
@@ -106,13 +121,13 @@ char	*convert_dq_token(char *token)
 	// int i;
 	// int size;
 	char *tmp;
-	char *tmp2;
+	// char *tmp2;
 
 	// 1. remove double quotes
 	// 2. backslash
 	// 3. env
 	tmp = remove_dq(token);
-	tmp2 = handling_backslash(tmp);
+	tmp = handling_backslash(tmp);
 
 	// printf("dq parsing: %s\n", tmp2);
 	// char *str = ft_strdup("hello");
@@ -123,5 +138,5 @@ char	*convert_dq_token(char *token)
 	// printf("test: %s\n", str);
 
 
-	return (tmp2);
+	return (tmp);
 }
