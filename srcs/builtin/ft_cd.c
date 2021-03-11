@@ -6,7 +6,7 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:02:25 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/07 19:31:24 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/12 02:07:13 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #define PATH_MAX 1024
 
 extern char **g_envs;
-void	set_pwd()
+
+static void	set_pwd(void)
 {
 	char	*old_pwd;
 	char	pwd[PATH_MAX];
 	int		i;
+
 	i = 0;
 	while (g_envs[i])
 	{
@@ -39,9 +41,9 @@ void	set_pwd()
 	}
 }
 
-void	ft_cd(char *obj)
+void		ft_cd(char **cmd_line)
 {
-	if (chdir(obj) == -1)
+	if (chdir(cmd_line[1]) == -1)
 		printf("working directory change error: %s\n", strerror(errno));
 	set_pwd();
 }

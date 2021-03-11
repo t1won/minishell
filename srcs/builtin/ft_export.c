@@ -6,93 +6,45 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 19:33:33 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/11 00:44:14 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/12 02:14:02 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
 int		ft_arrsize(char **arr);
-void	get_envs(char **envp);
+char	**get_envs(char **envs, int cnt);
 char	*search_env(char *key);
+char	*get_key(char *obj);
+void	*free_arr_env(t_env *env);
+t_env	*sort_env(t_env *env);
+void	free_double_arr(char **arr);
 
 extern char	**g_envs;
+extern int	g_exit_status;
 
-t_env		*get_key_value(int cnt)
+static t_env	*get_key_value(int cnt)
 {
 	t_env	*env;
 	int		i;
-	int		size_key;
-	int		size_value;
 
 	env = (t_env *)malloc(sizeof(t_env) * (cnt + 1));
 	i = -1;
 	while (g_envs[++i])
 	{
-		size_key = ft_strchr(g_envs[i], '=') - g_envs[i] + 1;
-		size_value = ft_strlen(g_envs[i]) - size_key + 1;
-		env[i].key = (char *)malloc(sizeof(char) * size_key);
-		env[i].value = (char *)malloc(sizeof(char) * size_value);
-		ft_strlcpy(env[i].key, g_envs[i], size_key);
-		ft_strlcpy(env[i].value, &g_envs[i][size_key], size_value);
+		env[i].key = get_key(g_envs[i]);
+		env[i].value = search_env(env[i].key);
 	}
 	if (search_env("OLDPWD") == NULL)
 	{
-		env[i].key = "OLDPWD";
+		env[i].key = ft_strdup("OLDPWD");
 		env[i++].value = NULL;
 	}
 	env[i].key = NULL;
 	return (env);
 }
 
-t_env		*sort_env(t_env *env)
-{
-	int		i;
-	int		j;
-	char	*temp;
-
-	i = -1;
-	while (env[++i].key)
-	{
-		j = i;
-		while (env[++j].key)
-		{
-			if (ft_strncmp(
-						env[i].key, env[j].key, ft_strlen(env[i].key) + 1) > 0)
-			{
-				temp = env[i].key;
-				env[i].key = env[j].key;
-				env[j].key = temp;
-				temp = env[i].value;
-				env[i].value = env[j].value;
-				env[j].value = temp;
-			}
-		}
-	}
-	return (env);
-}
-
-char		*search_env(char *key)
-{
-	int	i;
-
-	i = -1;
-	while (g_envs[++i])
-	{
-		if (ft_strncmp(key, g_envs[i], ft_strlen(key)) == 0 &&
-				g_envs[i][ft_strlen(key)] == '=')
-			return (&g_envs[i][ft_strlen(key) + 1]);
-	}
-	return (NULL);
-}
-
-/*
-** export명령어에 인자가 없는 경우
-** 1. key를 정렬- (아스키코드 작은값부터)
-** 2. declare -x key="value" 형태로 출력
-*/
-
-static void	print_export(void)
+static void		print_export(void)
 {
 	t_env	*env;
 	int		i;
@@ -110,18 +62,53 @@ static void	print_export(void)
 			printf("=\"%s\"", env[i].value);
 		printf("\n");
 	}
-	printf("%d %d\n", i, cnt);
+	free_arr_env(env);
 }
 
-void		ft_export(char **cmd_line)
+static void		add_env(char **envs, char *key, char *new)
+{
+	char	*value;
+	int		i;
+
+	i = -1;
+	while (envs[++i])
+	{
+		if (ft_strncmp(key, envs[i], ft_strlen(key)) == 0 &&
+				envs[i][ft_strlen(key)] == '=')
+		{
+			free(envs[i]);
+			break ;
+		}
+	}
+	envs[i] = ft_strdup(new);
+	if (i == ft_arrsize(envs))
+		envs[++i] = NULL;
+	free(key);
+}
+
+void			ft_export(char **cmd_line)
 {
 	char	**temp;
+	char	*key;
 	int		cnt;
+	int		i;
 
 	if (ft_arrsize(cmd_line) == 1)
 		print_export();
-
 	cnt = ft_arrsize(g_envs) + ft_arrsize(cmd_line);
-	if (!(temp = (char **)malloc(sizeof(char *) * cnt)))
-		return ; //malloc failed error
+	temp = get_envs(g_envs, cnt - 1);
+	i = 0;
+	while (cmd_line[++i])
+	{
+		if ((key = get_key(cmd_line[i])) == NULL)
+		{
+			printf("minishell: export: '%s': not a valid idetifier\n",
+					cmd_line[i]);
+			g_exit_status = 1;
+		}
+		else
+			add_env(temp, key, cmd_line[i]);
+	}
+	free_double_arr(g_envs);
+	g_envs = temp;
 }

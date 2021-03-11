@@ -6,7 +6,7 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:24:46 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/10 23:06:59 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/12 01:42:38 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_cd(char *obj);
 void	ft_env();
 void	ft_exit(char **objs);
 void	ft_export(char **cmd_line);
+void	ft_unset(char **cmd_line);
 
 int		ft_arrsize(char **arr)
 {
@@ -31,25 +32,38 @@ int		ft_arrsize(char **arr)
 		cnt++;
 	return (cnt);
 }
-
+/*
 void	get_envs(char **envp)
 {
-	int i;
 	int cnt;
 
 	cnt = ft_arrsize(envp);
+	if (!(g_envs = (char **)malloc(sizeof(char *) * (cnt + 1))))
+		exit(EXIT_FAILURE);
+	cnt = -1;
+	while (envp[++cnt])
+		g_envs[cnt] = ft_strdup(envp[cnt]);
+	g_envs[cnt] = NULL;
+}
+*/
+char	**get_envs(char **envs, int cnt)
+{
+	int i;
+	char **temp;
+
+	if (!(temp = (char **)malloc(sizeof(char *) * (cnt + 1))))
+		exit(EXIT_FAILURE);
 	i = -1;
-	if( !(g_envs = (char **)malloc(sizeof(char *) * (cnt + 1))))
-		return ;
-	while (++i < cnt)
-		g_envs[i] = ft_strdup(envp[i]);
-	g_envs[i] = NULL;
+	while (envs[++i])
+		temp[i] = ft_strdup(envs[i]);
+	temp[i] = NULL;
+	return (temp);
 }
 
 int		main(int argc, char **argv, char **envp)
 {
 	printf("argv[1] = %s\n", argv[1]);
-	get_envs(envp);
+	g_envs = get_envs(envp, ft_arrsize(envp));
 	/*
 	//test pwd
 	ft_pwd();
@@ -67,5 +81,14 @@ int		main(int argc, char **argv, char **envp)
 //	printf("g_exit_status : %d\n", g_exit_status);
 
 	ft_export(argv);
+	char *temp[2];
+	temp[0] = "export";
+	temp[1] = NULL;
+	ft_export(temp);
+	ft_unset(argv);
+	printf("before\n");
+	ft_export(temp);
+	while (1)
+	{}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:41:00 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/09 20:27:18 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/12 02:08:04 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	ft_echo(char **objs, char **envs)
 static int	check_opt(char *opt)
 {
 	int	i;
-	
+
 	if (opt[0] != '-')
 		return (0);
 	i = 1;
@@ -116,33 +116,21 @@ static int	check_opt(char *opt)
 	return (1);
 }
 
-void		ft_echo(char **objs)
+void		ft_echo(char **cmd_line)
 {
 	int	opt_n;
 	int	i;
 
 	opt_n = 0;
-	if (objs[0] != NULL)
-		opt_n = check_opt(objs[0]);
+	if (cmd_line[0] != NULL)
+		opt_n = check_opt(cmd_line[0]);
 	i = opt_n;
-	while (objs[i])
+	while (cmd_line[i])
 	{
 		if (i > opt_n)
 			printf(" ");
-		printf("%s", objs[i++]);
+		printf("%s", cmd_line[i++]);
 	}
 	if (opt_n == 0)
 		printf("\n");
 }
-/*
-//test main
-int	main(int argc, char **argv, char **envp)
-{
-	int i = 0;
-	argv++;
-	while(argv[i])
-		printf("%s ", argv[i++]);
-	printf("\n");
-	ft_echo(argv, envp);
-}
-*/
