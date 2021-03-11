@@ -6,7 +6,7 @@
 /*   By: jaeelee <jaeelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 23:30:33 by jaeelee           #+#    #+#             */
-/*   Updated: 2021/03/12 02:12:09 by jaeelee          ###   ########.fr       */
+/*   Updated: 2021/03/12 02:22:22 by jaeelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		ft_arrsize(char **arr);
 int		check_validkey(char *obj);
 
 extern char **g_envs;
+extern int	g_exit_status;
 
 static int	is_there_env(char **arg, char *env)
 {
@@ -71,8 +72,11 @@ void		ft_unset(char **cmd_line)
 	while (cmd_line[++i])
 	{
 		if (check_validkey(cmd_line[i]) != ft_strlen(cmd_line[i]))
+		{
 			printf("minishell: unset: '%s': not a valid identifier\n",
 					cmd_line[i]);
+			g_exit_status = 1;
+		}
 		else
 			unset[j++] = cmd_line[i];
 	}
