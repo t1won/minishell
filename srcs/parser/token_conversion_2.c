@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:43:53 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/12 20:53:39 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/12 21:02:37 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ char	*handling_dq_env(char *token)
 			{
 				if (token[i + env_key_len] == ' ')
 					break ;
-				// if (token[i + env_key_len + 1] == '$')
-				// {
-				// 	env_key_len++;
-				// 	break ;
-				// }
+				if (token[i + env_key_len + 1] == '$')
+				{
+					env_key_len++;
+					break ;
+				}
 				env_key_len++;
 			}
 			// printf("KEY LEN = %d\n", env_key_len);

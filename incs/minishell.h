@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:10:14 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/11 13:21:48 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/12 21:02:55 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	*get_envs_value(char *key);
 char *convert_sq_token(char *token);
 char	*convert_env_token(char *token);
 char	*convert_dq_token(char *token);
+char	*handling_dq_env(char *token);
 
 /*
 ** error
