@@ -6,7 +6,7 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 12:45:24 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/11 11:55:59 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/12 20:29:55 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ int		convert_tokens(char **tokens)
 	while (tokens[i])
 	{
 		if (tokens[i][0] == '\'')
+		{
+			printf("TEST1\n");
 			tokens[i] = convert_sq_token(tokens[i]);
+		}
 		if (tokens[i][0] == '$')
+		{
+			printf("TEST2\n");
 			tokens[i] = convert_env_token(tokens[i]);
+		}
 		if (tokens[i][0] == '\"')
+		{
+			printf("TEST3\n");
 			tokens[i] = convert_dq_token(tokens[i]);
+		}
 		i++;
 	}
 	return (1);

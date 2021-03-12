@@ -6,12 +6,13 @@
 /*   By: tseo <tseo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 21:24:29 by tseo              #+#    #+#             */
-/*   Updated: 2021/03/11 11:23:05 by tseo             ###   ########.fr       */
+/*   Updated: 2021/03/12 19:02:51 by tseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
+// TODO: $ ENV
 char *convert_sq_token(char *token)
 {
 	int i;
@@ -52,7 +53,10 @@ char	*convert_env_token(char *token)
 
 	converted_token = NULL;
 	if (ft_strlen(token) == 2 && ft_strncmp(token, "$?", 2) == 0)
-		converted_token = ft_strdup(ft_itoa(g_exit_status));
+	{
+		converted_token = ft_itoa(g_exit_status);
+		return (converted_token);
+	}
 	if (get_envs_value(&token[1]))
 		converted_token = ft_strdup(get_envs_value(&token[1]));
 	else

@@ -37,8 +37,6 @@ int lsh_exit(char **args)
   return 0;
 }
 
-
-
 // start processes
 int ft_launch(char **args)
 {
@@ -71,7 +69,6 @@ int ft_launch(char **args)
 
   return 1;
 }
-
 
 int ft_execute(char **args)
 {
